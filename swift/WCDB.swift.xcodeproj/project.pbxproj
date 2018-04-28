@@ -109,6 +109,10 @@
 		23E9E0051FC3C76F005DE71C /* SQLite-Bridging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E9E0041FC3C76F005DE71C /* SQLite-Bridging.swift */; };
 		23E9E0071FC3D80B005DE71C /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E9E0061FC3D80B005DE71C /* Table.swift */; };
 		23E9E0091FC3D810005DE71C /* TableInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E9E0081FC3D810005DE71C /* TableInterface.swift */; };
+		DF1911AB209466FB00BD415D /* SelectSQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1911AA209466FB00BD415D /* SelectSQL.swift */; };
+		DF1911AE209467AE00BD415D /* UpdateSQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1911AD209467AE00BD415D /* UpdateSQL.swift */; };
+		DF1911B020946B7600BD415D /* StatementSelectSQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1911AF20946B7600BD415D /* StatementSelectSQL.swift */; };
+		DF1911B220946B8E00BD415D /* StatementUpdateSQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1911B120946B8E00BD415D /* StatementUpdateSQL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -248,6 +252,10 @@
 		23E9E0041FC3C76F005DE71C /* SQLite-Bridging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SQLite-Bridging.swift"; sourceTree = "<group>"; };
 		23E9E0061FC3D80B005DE71C /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
 		23E9E0081FC3D810005DE71C /* TableInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInterface.swift; sourceTree = "<group>"; };
+		DF1911AA209466FB00BD415D /* SelectSQL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSQL.swift; sourceTree = "<group>"; };
+		DF1911AD209467AE00BD415D /* UpdateSQL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateSQL.swift; sourceTree = "<group>"; };
+		DF1911AF20946B7600BD415D /* StatementSelectSQL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementSelectSQL.swift; sourceTree = "<group>"; };
+		DF1911B120946B8E00BD415D /* StatementUpdateSQL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementUpdateSQL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,8 +331,10 @@
 				230209861FBED533000D69B6 /* MultiSelect.swift */,
 				230209871FBED533000D69B6 /* RowSelect.swift */,
 				230209881FBED533000D69B6 /* Select.swift */,
+				DF1911AA209466FB00BD415D /* SelectSQL.swift */,
 				230209891FBED533000D69B6 /* Selectable.swift */,
 				2302098A1FBED533000D69B6 /* Update.swift */,
+				DF1911AD209467AE00BD415D /* UpdateSQL.swift */,
 				23E9E0061FC3D80B005DE71C /* Table.swift */,
 				23E9E0081FC3D810005DE71C /* TableInterface.swift */,
 				2310C60A1FCC23520030F3D3 /* Declare.swift */,
@@ -428,8 +438,10 @@
 				238D0B331FAB1F7E00BC2659 /* StatementRollback.swift */,
 				238D0B341FAB1F7E00BC2659 /* StatementSavepoint.swift */,
 				238D0B351FAB1F7E00BC2659 /* StatementSelect.swift */,
+				DF1911AF20946B7600BD415D /* StatementSelectSQL.swift */,
 				238D0B361FAB1F7E00BC2659 /* StatementTransaction.swift */,
 				238D0B371FAB1F7E00BC2659 /* StatementUpdate.swift */,
+				DF1911B120946B8E00BD415D /* StatementUpdateSQL.swift */,
 				238D0B381FAB1F7E00BC2659 /* StatementVacuum.swift */,
 				238D0B391FAB1F7E00BC2659 /* Subquery.swift */,
 				238D0B3A1FAB1F7E00BC2659 /* TableConstraint.swift */,
@@ -598,6 +610,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF1911B020946B7600BD415D /* StatementSelectSQL.swift in Sources */,
 				238D0B8C1FAB1F7E00BC2659 /* StatementCreateTable.swift in Sources */,
 				238D0B891FAB1F7E00BC2659 /* StatementAlterTable.swift in Sources */,
 				230209AA1FBED533000D69B6 /* Select.swift in Sources */,
@@ -628,6 +641,7 @@
 				238D0B9B1FAB1F7E00BC2659 /* StatementUpdate.swift in Sources */,
 				238D0BC71FAB1F7E00BC2659 /* Error.swift in Sources */,
 				238D0B7C1FAB1F7E00BC2659 /* Conflict.swift in Sources */,
+				DF1911B220946B8E00BD415D /* StatementUpdateSQL.swift in Sources */,
 				238D0B931FAB1F7E00BC2659 /* StatementInsert.swift in Sources */,
 				238D0B9C1FAB1F7E00BC2659 /* StatementVacuum.swift in Sources */,
 				238D0B941FAB1F7E00BC2659 /* StatementPragma.swift in Sources */,
@@ -651,6 +665,7 @@
 				238D0B861FAB1F7E00BC2659 /* OrderTerm.swift in Sources */,
 				238D0B801FAB1F7E00BC2659 /* Handle.swift in Sources */,
 				230209A81FBED533000D69B6 /* MultiSelect.swift in Sources */,
+				DF1911AE209467AE00BD415D /* UpdateSQL.swift in Sources */,
 				237931C51FD52CB4003BBA5F /* TableCodable.swift in Sources */,
 				239FBDF320C6831A0082FE24 /* FundamentalValue.swift in Sources */,
 				238D0B8E1FAB1F7E00BC2659 /* StatementDelete.swift in Sources */,
@@ -687,6 +702,7 @@
 				238D0B811FAB1F7E00BC2659 /* HandleStatement.swift in Sources */,
 				238D0B921FAB1F7E00BC2659 /* StatementExplain.swift in Sources */,
 				23E9E0051FC3C76F005DE71C /* SQLite-Bridging.swift in Sources */,
+				DF1911AB209466FB00BD415D /* SelectSQL.swift in Sources */,
 				238D0B781FAB1F7E00BC2659 /* ColumnDef.swift in Sources */,
 				230686DC1FAC0E5B0005EE8B /* Convertible.swift in Sources */,
 				238D0B991FAB1F7E00BC2659 /* StatementSelect.swift in Sources */,
