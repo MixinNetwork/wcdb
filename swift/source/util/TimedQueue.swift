@@ -42,9 +42,7 @@ final class TimedQueue<Key: Hashable> {
         guard let index = map.index(forKey: key) else {
             return
         }
-        if map[index].value < list.count {
-            list.remove(at: map[index].value)
-        }
+        list.remove(at: map[index].value)
         map.remove(at: index)
     }
 
@@ -54,7 +52,9 @@ final class TimedQueue<Key: Hashable> {
         let signal = list.isEmpty
 
         if let index = map.index(forKey: key) {
-            list.remove(at: map[index].value)
+            if map[index].value < list.count {
+                list.remove(at: map[index].value)
+            }
             map.remove(at: index)
         }
 
