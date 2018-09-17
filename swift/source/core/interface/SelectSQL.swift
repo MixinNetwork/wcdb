@@ -2,7 +2,7 @@ import Foundation
 
 extension Database {
 
-    public func prepareSelectSQL(on propertyConvertibleList: [PropertyConvertible], sql: String, values: [ColumnEncodableBase] = []) throws -> SelectSQL {
+    public func prepareSelectSQL(on propertyConvertibleList: [PropertyConvertible], sql: String, values: [ColumnEncodable] = []) throws -> SelectSQL {
         return try SelectSQL(with: self, on: propertyConvertibleList, sql: sql, values: values)
     }
 
@@ -15,11 +15,11 @@ public final class SelectSQL {
     final var statement: StatementSelectSQL
 
     private let keys: [CodingTableKeyBase]
-    private let values: [ColumnEncodableBase]
+    private let values: [ColumnEncodable]
 
     private lazy var decoder = TableDecoder(keys, on: optionalRecyclableHandleStatement!)
 
-    init(with core: Core, on propertyConvertibleList: [PropertyConvertible], sql: String, values: [ColumnEncodableBase]) throws {
+    init(with core: Core, on propertyConvertibleList: [PropertyConvertible], sql: String, values: [ColumnEncodable]) throws {
         keys = propertyConvertibleList.asCodingTableKeys()
         self.statement = StatementSelectSQL(sql: sql)
         self.core = core
@@ -32,7 +32,7 @@ public final class SelectSQL {
         }
         let handleStatement = try lazyHandleStatement()
         for idx in 0..<values.count {
-            handleStatement.bind(values[idx].archivedFundamentalValue(), toIndex: idx + 1)
+            handleStatement.bind(values[idx].archivedValue(), toIndex: idx + 1)
         }
     }
 
