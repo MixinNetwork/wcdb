@@ -696,6 +696,12 @@ extension Database {
         try handle.raw.handle.backup(withKey: key)
     }
 
+    /// Backup data
+    public func backup(withFile path: String, progress: @escaping @convention (c) (Int32, Int32) -> Void) throws {
+        let handle = try flowOut()
+        try handle.raw.handle.backup(withFile: path, progress: progress)
+    }
+
     /// Recover data from a corruped db. You'd better to recover a closed database.  
     ///
     /// - Parameters:

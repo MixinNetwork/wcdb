@@ -113,6 +113,8 @@
 		DF1911AE209467AE00BD415D /* UpdateSQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1911AD209467AE00BD415D /* UpdateSQL.swift */; };
 		DF1911B020946B7600BD415D /* StatementSelectSQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1911AF20946B7600BD415D /* StatementSelectSQL.swift */; };
 		DF1911B220946B8E00BD415D /* StatementUpdateSQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1911B120946B8E00BD415D /* StatementUpdateSQL.swift */; };
+		DF1F278121A54CE5009A74C6 /* sqlite_backup.h in Headers */ = {isa = PBXBuildFile; fileRef = DF1F277F21A54CE5009A74C6 /* sqlite_backup.h */; };
+		DF1F278221A54CE5009A74C6 /* sqlite_backup.c in Sources */ = {isa = PBXBuildFile; fileRef = DF1F278021A54CE5009A74C6 /* sqlite_backup.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,6 +258,8 @@
 		DF1911AD209467AE00BD415D /* UpdateSQL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateSQL.swift; sourceTree = "<group>"; };
 		DF1911AF20946B7600BD415D /* StatementSelectSQL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementSelectSQL.swift; sourceTree = "<group>"; };
 		DF1911B120946B8E00BD415D /* StatementUpdateSQL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementUpdateSQL.swift; sourceTree = "<group>"; };
+		DF1F277F21A54CE5009A74C6 /* sqlite_backup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sqlite_backup.h; sourceTree = "<group>"; };
+		DF1F278021A54CE5009A74C6 /* sqlite_backup.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sqlite_backup.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -480,6 +484,8 @@
 				230209BF1FBEE3CC000D69B6 /* Convenience.swift */,
 				231BC02E1FC2CC6E00011C69 /* TimedQueue.swift */,
 				231BC0301FC2CDCA00011C69 /* SteadyClock.swift */,
+				DF1F277F21A54CE5009A74C6 /* sqlite_backup.h */,
+				DF1F278021A54CE5009A74C6 /* sqlite_backup.c */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -509,6 +515,7 @@
 			files = (
 				238D0BCD1FAB1F7E00BC2659 /* SQLite-Bridging.h in Headers */,
 				23794DB41FAB23AD001E79DE /* WCDB-Bridging.h in Headers */,
+				DF1F278121A54CE5009A74C6 /* sqlite_backup.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +711,7 @@
 				23E9E0051FC3C76F005DE71C /* SQLite-Bridging.swift in Sources */,
 				DF1911AB209466FB00BD415D /* SelectSQL.swift in Sources */,
 				238D0B781FAB1F7E00BC2659 /* ColumnDef.swift in Sources */,
+				DF1F278221A54CE5009A74C6 /* sqlite_backup.c in Sources */,
 				230686DC1FAC0E5B0005EE8B /* Convertible.swift in Sources */,
 				238D0B991FAB1F7E00BC2659 /* StatementSelect.swift in Sources */,
 				238D0B8B1FAB1F7E00BC2659 /* StatementCreateIndex.swift in Sources */,

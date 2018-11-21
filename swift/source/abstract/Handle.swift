@@ -169,6 +169,16 @@ extension Handle {
         return path+Handle.backupSubfix
     }
 
+    public func backup(withFile path: String, progress: @escaping @convention (c) (Int32, Int32) -> Void) throws {
+        var rc = SQLITE_OK
+        rc = backupDb(handle, path, progress)
+        guard rc == SQLITE_OK else {
+            throw Error.reportRepair(path: path,
+                                     operation: .loadMaster,
+                                     code: Int(rc))
+        }
+    }
+
     public func backup(withKey optionalKey: Data? = nil) throws {
         var rc = SQLITE_OK
         if let key = optionalKey {
