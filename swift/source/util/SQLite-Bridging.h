@@ -23,6 +23,7 @@
 
 #import <sqlcipher/sqlite3.h>
 #import <sqlcipher/fts3_tokenizer.h>
+#import "sqlite_backup.h"
 
 struct Tokenizer {
     sqlite3_tokenizer base;
