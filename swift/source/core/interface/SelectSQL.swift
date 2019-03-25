@@ -6,6 +6,10 @@ extension Database {
         return try SelectSQL(with: self, on: propertyConvertibleList, sql: sql, values: values)
     }
 
+    public func prepareSelectSQL(sql: String, values: [ColumnEncodable] = []) throws -> SelectSQL {
+        return try SelectSQL(with: self, on: [], sql: sql, values: values)
+    }
+
 }
 
 public final class SelectSQL {
@@ -68,6 +72,28 @@ public final class SelectSQL {
             objects.append(try Object.init(from: decoder))
         }
         return objects
+    }
+
+    public func getValue() throws -> FundamentalValue {
+        let handleStatement = try lazyHandleStatement()
+        for idx in 0..<values.count {
+            handleStatement.bind(values[idx].archivedValue(), toIndex: idx + 1)
+        }
+        if try next() {
+            switch handleStatement.columnType(atIndex: 0) {
+            case .integer32:
+                return FundamentalValue(handleStatement.columnValue(atIndex: 0, of: Int32.self))
+            case .integer64:
+                return FundamentalValue(handleStatement.columnValue(atIndex: 0, of: Int64.self))
+            case .float:
+                return FundamentalValue(handleStatement.columnValue(atIndex: 0, of: Double.self))
+            case .text:
+                return FundamentalValue(handleStatement.columnValue(atIndex: 0, of: String.self))
+            default:
+                return FundamentalValue(nil)
+            }
+        }
+        return FundamentalValue(nil)
     }
 
     final func finalize() throws {
