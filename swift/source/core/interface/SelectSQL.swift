@@ -96,6 +96,18 @@ public final class SelectSQL {
         return FundamentalValue(nil)
     }
 
+    public func getStringValues() throws -> [String] {
+        let handleStatement = try lazyHandleStatement()
+        for idx in 0..<values.count {
+            handleStatement.bind(values[idx].archivedValue(), toIndex: idx + 1)
+        }
+        var values = [String]()
+        while try next() {
+            values.append(handleStatement.columnValue(atIndex: 0, of: String.self))
+        }
+        return values
+    }
+
     final func finalize() throws {
         if let recyclableHandleStatement = optionalRecyclableHandleStatement {
             try recyclableHandleStatement.raw.finalize()
