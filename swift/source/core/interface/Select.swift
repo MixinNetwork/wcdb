@@ -32,6 +32,11 @@ public final class Select: Selectable {
         super.init(with: core, statement: statement)
     }
 
+    init(with core: Core, on propertyConvertibleList: [PropertyConvertible], statement: StatementSelect) throws {
+        keys = propertyConvertibleList.asCodingTableKeys()
+        super.init(with: core, statement: statement)
+    }
+
     /// Get next selected object according to the `CodingTableKey`. You can do an iteration using it.
     ///
     /// - Returns: Table decodable object according to the `CodingTableKey`. Nil means the end of iteration.

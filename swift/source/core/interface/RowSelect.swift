@@ -37,6 +37,10 @@ public final class RowSelect: Selectable {
         super.init(with: core, statement: statement)
     }
 
+    init(with core: Core, stmt: StatementSelect) throws {
+        super.init(with: core, statement: stmt)
+    }
+
     private func extract(atIndex index: Int) throws -> FundamentalValue {
         let handleStatement = try self.lazyHandleStatement()
         switch handleStatement.columnType(atIndex: index) {

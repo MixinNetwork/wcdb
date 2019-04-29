@@ -352,6 +352,8 @@ public protocol RowSelectInterface: class {
                  limit: Limit?,
                  offset: Offset?) throws -> FundamentalRowXColumn
 
+    func getRows(stmt: StatementSelect) throws -> FundamentalRowXColumn
+
     /// Get rows by specific selecting
     ///
     /// - Parameters:
@@ -500,6 +502,11 @@ extension RowSelectInterface where Self: Core {
         return try rowSelect.allRows()
     }
 
+    public func getRows(stmt: StatementSelect) throws -> FundamentalRowXColumn {
+        let rowSelect = try RowSelect(with: self, stmt: stmt)
+        return try rowSelect.allRows()
+    }
+
     public func getRows(on columnResultConvertibleList: ColumnResultConvertible...,
                         fromTable table: String,
                         where condition: Condition? = nil,
@@ -634,6 +641,10 @@ public protocol SelectInterface: class {
         limit: Limit?,
         offset: Offset?) throws -> [Object]
 
+    func getObjects<Object: TableDecodable>(
+        on propertyConvertibleList: [PropertyConvertible],
+        stmt: StatementSelect) throws -> [Object]
+
     /// Get objects on specific(or all) properties
     ///
     /// - Parameters:
@@ -710,6 +721,13 @@ extension SelectInterface where Self: Core {
                 select.limit(limit!)
             }
         }
+        return try select.allObjects()
+    }
+
+    public func getObjects<Object: TableDecodable>(
+        on propertyConvertibleList: [PropertyConvertible],
+        stmt: StatementSelect) throws -> [Object] {
+        let select = try Select(with: self, on: propertyConvertibleList, statement: stmt)
         return try select.allObjects()
     }
 
