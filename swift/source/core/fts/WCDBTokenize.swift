@@ -153,27 +153,25 @@ public final class WCDBCursorInfo: CursorInfoBase {
         for i in 0..<Int(inputLength) {
             buffer[i] = UInt8(tolower(Int32(input.advanced(by: i).pointee)))
         }
-        let optionalString = buffer.withUnsafeBytes { (bytes) -> String? in
-            return String(bytes: bytes.baseAddress!.assumingMemoryBound(to: Int8.self),
-                          count: Int(inputLength),
-                          encoding: .ascii)
-        }
+        let optionalString = NSString(bytes: input,
+                                      length: Int(inputLength),
+                                      encoding: String.Encoding.ascii.rawValue)
         guard let string = optionalString else {
             return SQLITE_OK
         }
         var optionalLemma: String? = nil
-        string.enumerateLinguisticTags(in: string.startIndex..<string.endIndex,
-                                       scheme: NSLinguisticTagScheme.lemma.rawValue,
-                                       options: NSLinguisticTagger.Options.omitWhitespace,
+        string.enumerateLinguisticTags(in: NSRange(location: 0, length: string.length),
+                                       scheme: .lemma,
+                                       options: .omitWhitespace,
                                        orthography: WCDBCursorInfo.orthography,
-                                       invoking: { (tag, _, _, stop) in
-                                        optionalLemma = tag.lowercased()
-                                        stop = true
+                                       using: { (tag, _, _, stop) in
+                                        optionalLemma = tag?.rawValue.lowercased()
+                                        stop.pointee = true
         })
         guard let lemma = optionalLemma,
             lemma.count > 0,
-            lemma.caseInsensitiveCompare(string) != ComparisonResult.orderedSame else {
-            return SQLITE_OK
+            lemma.caseInsensitiveCompare(string as String) != ComparisonResult.orderedSame else {
+                return SQLITE_OK
         }
         lemmaBufferLength = Int32(lemma.count)
         if lemmaBufferLength > lemmaBuffer.capacity {
