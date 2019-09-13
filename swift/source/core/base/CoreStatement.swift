@@ -243,6 +243,10 @@ public final class CoreStatement {
         return handleStatement.changes
     }
 
+    public func interrupt() {
+        handleStatement.interrupt()
+    }
+
     /// The row id of most recent insertion.
     public var lastInsertedRowID: Int64 {
         return handleStatement.lastInsertedRowID
