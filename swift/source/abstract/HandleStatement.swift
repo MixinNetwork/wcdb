@@ -76,6 +76,10 @@ public final class HandleStatement {
         return Int(sqlite3_changes(sqlite3_db_handle(stmt)))
     }
 
+    public func interrupt() {
+        sqlite3_interrupt(sqlite3_db_handle(stmt))
+    }
+
     public func bind(_ value: FundamentalValue, toIndex index: Int) {
         switch value.type {
         case .integer32:
