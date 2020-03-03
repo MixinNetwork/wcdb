@@ -543,19 +543,6 @@ extension Database {
         }
     }
 
-    public func setCheckPoint(isIgnoreCheck: Bool) {
-        if isIgnoreCheck {
-            handlePool.setConfig(named: DefaultConfigOrder.checkpoint.description, with: { (handle: Handle) throws in
-            })
-        } else {
-            if let checkpointConfig = Database.defaultConfigs.config(
-                by: DefaultConfigOrder.checkpoint.description) {
-                handlePool.setConfig(named: DefaultConfigOrder.checkpoint.description,
-                with: checkpointConfig)
-            }
-        }
-    }
-
     /// This interface is equivalent to `database.setTokenizes(tokenizes)`
     ///
     /// - Parameter tokenizes: registed tokenizeName. You can use builtin tokenizer named `.WCDB` or `.Apple`
