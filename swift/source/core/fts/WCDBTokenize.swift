@@ -145,42 +145,6 @@ public final class WCDBCursorInfo: CursorInfoBase {
         return SQLITE_OK
     }
 
-    static let orthography = NSOrthography(dominantScript: "Latin", languageMap: [ "Latn": ["en"]])
-    func lemmatization(input: UnsafePointer<Int8>, inputLength: Int32) -> Int32 {
-        if inputLength > buffer.count {
-            buffer.expand(toNewSize: Int(inputLength))
-        }
-        for i in 0..<Int(inputLength) {
-            buffer[i] = UInt8(tolower(Int32(input.advanced(by: i).pointee)))
-        }
-        let optionalString = NSString(bytes: input,
-                                      length: Int(inputLength),
-                                      encoding: String.Encoding.ascii.rawValue)
-        guard let string = optionalString else {
-            return SQLITE_OK
-        }
-        var optionalLemma: String? = nil
-        string.enumerateLinguisticTags(in: NSRange(location: 0, length: string.length),
-                                       scheme: .lemma,
-                                       options: .omitWhitespace,
-                                       orthography: WCDBCursorInfo.orthography,
-                                       using: { (tag, _, _, stop) in
-                                        optionalLemma = tag?.rawValue.lowercased()
-                                        stop.pointee = true
-        })
-        guard let lemma = optionalLemma,
-            lemma.count > 0,
-            lemma.caseInsensitiveCompare(string as String) != ComparisonResult.orderedSame else {
-                return SQLITE_OK
-        }
-        lemmaBufferLength = Int32(lemma.count)
-        if lemmaBufferLength > lemmaBuffer.capacity {
-            lemmaBuffer.expand(toNewSize: Int(lemmaBufferLength))
-        }
-        memcpy(&lemmaBuffer, lemma.cString, Int(lemmaBufferLength))
-        return SQLITE_OK
-    }
-
     func subTokensStep() {
         self.startOffset = self.subTokensCursor
         self.bufferLength = Int32(self.subTokensLengthArray[0])
@@ -260,18 +224,10 @@ public final class WCDBCursorInfo: CursorInfoBase {
                     subTokensStep()
                 default: break
                 }
-                if tokenType == .basicMultilingualPlaneLetter {
-                    rc = lemmatization(input: self.input.advanced(by: Int(self.startOffset)),
-                                       inputLength: self.bufferLength)
-                    guard rc == SQLITE_OK else {
-                        return rc
-                    }
-                } else {
-                    if self.bufferLength > self.buffer.count {
-                        self.buffer.expand(toNewSize: Int(self.bufferLength))
-                    }
-                    memcpy(&self.buffer, input.advanced(by: Int(self.startOffset)), Int(self.bufferLength))
+                if self.bufferLength > self.buffer.count {
+                    self.buffer.expand(toNewSize: Int(self.bufferLength))
                 }
+                memcpy(&self.buffer, input.advanced(by: Int(self.startOffset)), Int(self.bufferLength))
             } else {
                 subTokensStep()
                 if self.bufferLength > self.buffer.capacity {
